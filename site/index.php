@@ -10,9 +10,11 @@ $status = json_decode($result,true);
     <head>
         <title>Smart Home</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="apple-touch-icon" href="home.png" />
         <link href="bootstrap.min.css" rel="stylesheet">
         <script src="jquery-1.8.3.min.js"></script>
         <script src="bootstrap-button.js"></script>
