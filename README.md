@@ -1,4 +1,9 @@
 Control the light and fan of my room
+## Demo
+http://www.youtube.com/watch?v=O7Jtfc7_rPQ
+
+## How to do it
+http://micbase.com/use-siri-to-control-your-light-and-fan/
 
 ## Files
 * **Adafruit_DHT_Driver**: C code for temperature sensor
