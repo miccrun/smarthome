@@ -47,6 +47,15 @@ def main():
                     url = "https://home.micbase.com:11443/store.php?valid=1&tmp=" +\
                             data[0] + "&hum=" + data[1] + "&heat=" + str(heat)
                     urllib2.urlopen(url).read()
+
+                    url_open = 'http://localhost/control.php?cmd=103'
+                    url_close = 'http://localhost/control.php?cmd=104'
+
+                    if data[0] >= 27:
+                        urllib2.urlopen(url_open).read()
+                    else:
+                        urllib2.urlopen(url_close).read()
+
                     return
 
         except Exception:
