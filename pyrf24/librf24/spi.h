@@ -1,12 +1,12 @@
-/* 
+/*
  * File:   spi.h
  * Author: Purinda Gunasekara <purinda@gmail.com>
- * 
+ *
  * Created on 24 June 2012, 11:00 AM
  */
 
 #ifndef SPI_H
-#define	SPI_H
+#define SPI_H
 
 #include <string>
 #include <stdint.h>
@@ -25,26 +25,26 @@
 using namespace std;
 
 class SPI {
-public:
-	
-	SPI();
-	uint8_t transfer(uint8_t tx_);
-	virtual ~SPI();
+    public:
 
-private:
+        SPI();
+        uint8_t transfer(uint8_t tx_);
+        virtual ~SPI();
 
-	// Default SPI device
-	string device;
-	// SPI Mode set 
-	uint8_t mode;
-	// word size
-	uint8_t bits;
-	// Set SPI speed
-	uint32_t speed;
-	int fd;
+    private:
 
-	void init();	
+        // Default SPI device
+        string device;
+        // SPI Mode set
+        uint8_t mode;
+        // word size
+        uint8_t bits;
+        // Set SPI speed
+        uint32_t speed;
+        int fd;
+
+        void init();
 };
 
-#endif	/* SPI_H */
+#endif /* SPI_H */
 
