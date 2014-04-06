@@ -5,6 +5,10 @@
  * This function is added in order to simulate arduino delay() function
  * @param milisec
  */
+
+static struct timeval start, end;
+static long mtime, seconds, useconds;
+
 void __msleep(int milisec)
 {
     struct timespec req = {0};

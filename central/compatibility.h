@@ -15,9 +15,6 @@ extern "C" {
 #include <stddef.h>
 #include <sys/time.h>
 
-    static struct timeval start, end;
-    static long mtime, seconds, useconds;
-
     void __msleep(int milisec);
     void __usleep(int milisec);
     void __start_timer();
