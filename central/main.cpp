@@ -173,9 +173,34 @@ void read_queue(string& command)
         command = "";
 }
 
-void post_data(const string path, const string data)
+size_t dummy_write(char *ptr, size_t size, size_t nmemb, void *userdata)
 {
-    //API_URL + path
+       return size * nmemb;
+}
+
+void post_data(const string url, const string data)
+{
+    CURL *curl;
+    CURLcode res;
+
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl = curl_easy_init();
+
+    if (curl)
+    {
+        // Hide curl output
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &dummy_write);
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data.c_str());
+
+        res = curl_easy_perform(curl);
+        if(res != CURLE_OK)
+        {
+            cout<<"Errror in posting request, "<<curl_easy_strerror(res)<<endl;
+        }
+        curl_easy_cleanup(curl);
+    }
+    curl_global_cleanup();
 }
 
 int main(int argc, char** argv)
@@ -199,9 +224,12 @@ int main(int argc, char** argv)
                 response[PAYLOAD_SIZE] = '\0';
                 if (response[0] == 'T')
                 {
-                    printf("%s\n", response);
                     response_device_id = string(response, 1, 4);
-                    //postData("/event/2/" + deviceID, data)
+                    cout<<response<<endl;
+
+                    ostringstream url;
+                    url<<API_URL<<"/event/2/"<<response_device_id;
+                    post_data(url.str(), string(response));
                 }
             }
         }
@@ -223,7 +251,10 @@ int main(int argc, char** argv)
                 oss<<"S"<<data[0]<<data[2];
                 send_message(data[0], oss.str(), return_message);
                 cout<<return_message<<endl;
-                //postData("/operation_log/" + deviceID + "/" + operationLogID, result)
+
+                ostringstream url;
+                url<<API_URL<<"/operation_log/"<<data[0]<<"/"<<data[1];
+                post_data(url.str(), return_message);
             }
             else
                 cout<<"Invalid Format"<<endl;
