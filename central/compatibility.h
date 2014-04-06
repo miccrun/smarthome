@@ -13,6 +13,7 @@ extern "C" {
 #endif
 
 #include <stddef.h>
+#include <time.h>
 #include <sys/time.h>
 
     void __msleep(int milisec);
